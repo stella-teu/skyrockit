@@ -11,6 +11,8 @@ import {passUserToView}  from "./middleware/pass-user-to-view.js";
 import applicationsController from "./controllers/applications.js";
 
 const port = process.env.PORT ? process.env.PORT : '3000';
+import path from "path";
+const __dirname = path.resolve();
 
 mongoose.connect(process.env.MONGODB_URI);
 
@@ -20,6 +22,7 @@ mongoose.connection.on('connected', () => {
 
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
+app.use(express.static(path.join(__dirname, 'public')));
 // app.use(morgan('dev'));
 app.set("view engine", "ejs");
 app.use(
