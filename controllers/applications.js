@@ -60,4 +60,30 @@ router.delete("/:applicationId", async (req,res) => {
     }
 })
 
+router.get("/:applicationId/edit", async (req, res) => {
+    try {
+        const currentUser = await User.findById(req.session.user._id);
+        const application = currentUser.applications.id(req.params.applicationId);
+        res.render("applications/edit.ejs", {
+            application: application,
+        });
+    } catch (error){
+        console.log(error);
+        res.redirect("/");
+    }
+})
+
+router.put("/:applicationId", async (req, res) => {
+    try {
+        const currentUser = await User.findById(req.session.user._id);
+        const application = currentUser.applications.id(req.params.applicationId);
+        application.set(req.body);
+        await currentUser.save();
+        res.redirect(`${req.params.applicationId}`);
+    } catch (error){
+        console.log(error)
+        res.redirect("/");
+    }
+})
+
 export default router;

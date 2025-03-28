@@ -6,6 +6,7 @@
     <title><%= application.title %></title>
 </head>
 <body>
+    <%- include('../partials/_navbar.ejs') %>
     <h1><%= application.title %> at <%= application.company %></h1>
     <% if (application.notes) { %>
     <p>Notes: <%= application.notes %></p>
@@ -13,6 +14,11 @@
     <a href="<%= application.postingLink %>">View job posting</a>
     <% } %>
     <p>Current Status: <%= application.status %></p>
+
+    <a href="/users/<%= user._id %>/applications/<%= application._id %>/edit">
+        Edit this application
+    </a>
+
     <form action="/users/<%= user._id %>/applications/<%= application._id %>?_method=DELETE" method="POST">
         <button type="submit">Delete this application</button>
     </form>
