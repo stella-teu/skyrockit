@@ -1,13 +1,11 @@
-const dotenv = require('dotenv');
-dotenv.config();
-const express = require('express');
+import "dotenv/config";
+import express from "express";
 const app = express();
-const mongoose = require('mongoose');
-const methodOverride = require('method-override');
-const morgan = require('morgan');
-const session = require('express-session');
-
-const authController = require('./controllers/auth.js');
+import mongoose from "mongoose";
+import morgan from "morgan";
+import session from "express-session";
+import authController from "./controllers/auth.js";
+import methodOverride from "method-override";
 
 const port = process.env.PORT ? process.env.PORT : '3000';
 
